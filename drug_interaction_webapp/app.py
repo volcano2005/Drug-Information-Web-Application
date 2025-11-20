@@ -4,15 +4,7 @@ import requests
 
 app = Flask(__name__)
 
-# -------------------------------
-# OpenFDA URL
-# -------------------------------
 OPENFDA_LABEL_URL = "https://api.fda.gov/drug/label.json"
-
-
-# -------------------------------
-# INDIAN BRAND → GENERIC NAME MAPPING
-# -------------------------------
 BRAND_TO_GENERIC = {
 
     # Diabetes
@@ -82,10 +74,6 @@ BRAND_TO_GENERIC = {
 }
 
 
-
-# -------------------------------
-# FETCH DATA FROM OPENFDA
-# -------------------------------
 def fetch_from_openfda(drug):
 
     query = f'(openfda.generic_name:"{drug}" OR openfda.substance_name:"{drug}" OR openfda.brand_name:"{drug}")'
@@ -112,9 +100,6 @@ def fetch_from_openfda(drug):
 
 
 
-# -------------------------------
-# SAFE FIELD FETCHING
-# -------------------------------
 def safe_get(data, keys, default="No information available"):
     for key in keys:
         if key in data:
@@ -125,10 +110,6 @@ def safe_get(data, keys, default="No information available"):
     return default
 
 
-
-# -------------------------------
-# EXTRACT ALL DRUG INFORMATION
-# -------------------------------
 def extract_info(result, drug):
 
     NO = "No information available"
@@ -210,3 +191,4 @@ def result():
 # -------------------------------
 if __name__ == "__main__":
     app.run(debug=True)
+
